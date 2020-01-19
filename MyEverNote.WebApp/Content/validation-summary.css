@@ -1,0 +1,12 @@
+﻿.validation-summary-errors {
+    border: 2px dotted #cc9c10;
+    background-color: #ffc312;
+    border-radius: 8px;
+    margin: 17px;
+}
+
+    .validation-summary-errors ul {
+        list-style-type: none;
+        padding: 10px;
+        color: #ff0000;
+    }

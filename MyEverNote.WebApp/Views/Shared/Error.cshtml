@@ -1,0 +1,54 @@
+﻿
+@using MyEverNote.Entities.Messages
+@model MyEverNote.WebApp.ViewModels.ErrorViewModel
+@{
+    ViewBag.Title = Model.Title;
+}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="~/Content/login-register.css" rel="stylesheet" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="container">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header bg-danger text-center">
+                <h3>@Model.Header</h3>
+            </div>
+            <div class="card-body bg-light font-weight-bold">
+                <div class="justify-content-end text-primary">
+                    <div class="text-center">
+                        <h2>
+                            <i class="fas fa-check"></i>
+                           @Model.Title
+                        </h2>
+                    </div>
+                    <hr />
+                    <div>
+                        <p class="text-justify text-primary">
+                            @foreach (ErrorMessageObj msg in Model.Items)
+                            {
+                                @msg.Message<br/>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{ 
+    string js = string.Empty;
+if (Model.IsRedirecting)
+{
+    js = "setTimeout(function () {window.location ='" + Model.RedirectingUrl + "';}," + Model.RedirectingTimeOut + ");";
+}
+}
+
+<script>
+    $(function () {
+        $("footer").hide();
+        
+        @Html.Raw(js);
+    });
+</script>

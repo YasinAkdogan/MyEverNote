@@ -1,0 +1,78 @@
+﻿@using MyEverNote.Entities
+@model EverNoteUser
+@{
+    ViewBag.Title = "Profil Düzenle";
+}
+<link href="~/Content/validation-summary.css" rel="stylesheet" />
+<div class="container">
+    @using (Html.BeginForm("EditProfile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group row">
+            <h2>@ViewBag.Title</h2>
+            <hr />
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                <img src="~/Images/@Model.ProfilImageFileName" alt="userImg" class="img-circle" width="128" height="128" />
+                @Html.HiddenFor(model=>model.ProfilImageFileName)
+                <br /><br />
+                <input type="file" name="ProfileImage" id="ProfileImg" value="" class="form-control" />
+                <i class="fas fa-intro-circle">&nbsp;</i>
+                <span>
+                    <i>Lütfen Jpg,Jpeg yada png formatı kullanın.</i>
+                </span>
+            </div>
+            <div class="col-md-9">
+                @Html.ValidationSummary(false)
+                @Html.HiddenFor(model => model.Id)
+                <div class="from-group row">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { HtmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="from-group row">
+                    @Html.LabelFor(model => model.SurName, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SurName, new { HtmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="from-group row">
+                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserName, new { HtmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="from-group row">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.Password, new { HtmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="from-group row">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-md-2 col-form-label" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { HtmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="from-group row">
+
+                    <div class="col-md-10">
+                        <input type="submit" value="Kaydet" class="btn btn-success" />
+                        @Html.ActionLink("İptal", "ShowProfile", "Home", null, new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        $("footer").hide();
+    });
+</script>
+
+

@@ -1,0 +1,177 @@
+﻿@using MyEverNote.Entities
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>MyEverNote - Ana Sayfa</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/css/shop-homepage.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/146e636636.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    @{
+        EverNoteUser user = null;
+        if (Session["login"] != null)
+        {
+           
+            user = Session["login"] as EverNoteUser;
+        }
+    }
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-top:-60px;">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                <i class="fab fa-evernote"></i>
+                MyEverNote
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("Index","Home")">
+                            <i class="fas fa-home"></i>
+                            AnaSayfa
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    @if (user != null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-key"></i>
+                                Yönetim
+                            </a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("MostLiked","Home")">
+                            <i class="far fa-star"></i>
+                            En Beğenilenler
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Index">
+                            <i class="fas fa-th-list"></i>
+                            Son Yazılanlar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/About">
+                            <i class="fas fa-info-circle"></i>
+                            Hakkımızda
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (user == null)
+                    {
+                        <li class="nav-item active">
+                            <a class="nav-link" href="@Url.Action("Login","Home")">
+                                <i class="fas fa-sign-in-alt"></i>
+                                Giriş
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Register","Home")">
+                                <i class="fas fa-user-plus"></i>
+                                Üye Ol
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/ShowProfile">
+                                <i class="fas fa-user"></i>
+                                @user.UserName
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Çıkış
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page Content -->
+    @RenderBody()
+    <!-- /.container -->
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="row container-fluid">
+            <div class="col-lg-4 text-center text-white">
+                <h4>
+                    <strong>
+                        <i class="fas fa-sitemap"></i>
+                        Site Haritası
+                    </strong>
+                </h4>
+                <hr class="bg-white" />
+                <p>
+                    <ul class="list-group">
+                        <li>
+                            <a class="text-white" href="@Url.Action("About","Home")">
+                                <i class="fas fa-info-circle"></i>
+                                Hakkımızda
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-white" href="#">
+                                <i class="fas fa-star"></i>
+                                En Beğenilenler
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-white" href="#">
+                                <i class="fas fa-th-list"></i>
+                                Son Yazılanlar
+                            </a>
+                        </li>
+                    </ul>
+                </p>
+            </div>
+            <div class="col-lg-4 text-center text-white">
+                <h4>
+                    <strong>
+                        <i class="fab fa-evernote"></i>
+                        MyEverNote
+                    </strong>
+                </h4>
+                <hr class="bg-white" />
+                <p class="m-0 text-center text-white">Tüm Hakları Saklıdır.&copy; MyEverNote @DateTime.Now.Year</p>
+            </div>
+            <div class="col-lg-4 text-center text-white">
+                <h4>
+                    <strong>
+                        <i class="far fa-envelope"></i>
+                        E-Bülten Üyeliği
+                    </strong>
+                </h4>
+                <hr class="bg-white" />
+                <div class="input-group input-group-sm w-75 mx-auto mb-3">
+                    <input type="text" class="form-control" placeholder="E-posta adresiniz" aria-label="eposta adres" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                            <i class="far fa-paper-plane">Gönder</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
